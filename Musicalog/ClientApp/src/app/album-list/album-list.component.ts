@@ -17,7 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 export class AlbumListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'artist', 'type', 'stock', 'details', 'remove'];
   public dataSource = new MatTableDataSource<Album>();
-public pageSize: number;
+  public pageSize: number;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(AlbumDetailComponent, { static: true }) albumDetailComponent: AlbumDetailComponent;
@@ -47,8 +47,13 @@ public pageSize: number;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  public albumDetailScreen = (id: number) => {
-    this.router.navigate(['/album-detail', { id: id }]);
+  public albumDetailScreen = (idNumber: number) => {
+    this.router.navigate(['/album-detail', { id: idNumber }]);
+  }
+  public removeAlbum = (idNumber: number) => {
+    this.apiService.deleteAlbum('albumapi', idNumber).subscribe((res: number) => {
+      console.log('check');
+    });
   }
 
 }

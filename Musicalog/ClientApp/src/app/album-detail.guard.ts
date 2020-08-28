@@ -9,6 +9,6 @@ export class AlbumDetailGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-     return true;// return next.params['id'] !== null && next.params['id'] !== undefined;
+     return true;
   }
 }

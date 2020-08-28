@@ -8,5 +8,7 @@ namespace Musicalog.Repository
         List<Album> GetAllAlbums();
 
         int Update(Album album);
+
+        int DeleteUpdate(int id);
     }
 }

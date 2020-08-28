@@ -14,6 +14,14 @@ namespace Musicalog.Repository
             _context = context;
         }
 
+        public int DeleteUpdate(int id)
+        {
+            var existingAlbum = _context.Albums.ToList().Where(x => x.ID == id).FirstOrDefault();
+            _context.Albums.Remove(existingAlbum);
+            _context.SaveChanges();
+            return id;
+        }
+
         public List<Album> GetAllAlbums()
         {
             return _context.Albums.ToList();

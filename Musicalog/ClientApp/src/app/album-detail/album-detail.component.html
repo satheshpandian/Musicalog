@@ -6,7 +6,7 @@
         </mat-card-title>
         <form [formGroup]="albumForm" autocomplete="off" novalidate (ngSubmit)="createAlbum(albumForm.value)"
             fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-            <input  type="hidden" placeholder="id" formControlName="id" id="id">
+            <input  type="hidden"  formControlName="id" id="id">
             <mat-card-content>
                 <mat-form-field align="none">
                     <input matInput type="text" placeholder="Album's name" formControlName="name" id="name">

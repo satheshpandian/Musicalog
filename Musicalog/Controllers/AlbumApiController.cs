@@ -49,8 +49,9 @@ namespace Musicalog.Controllers
 
         // DELETE api/<AlbumController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public int Delete(int id)
         {
+            return _albumRepository.DeleteUpdate(id);
         }
     }
 }

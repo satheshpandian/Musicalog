@@ -35,7 +35,7 @@ public albums: Album[];
     return this.http.post<Album>(this.baseUrl + path, album);
   }
 
-  public remove(path: string, id: number) {
+  public deleteAlbum(path: string, id: number) {
     return this.http.delete(this.baseUrl + path + '/' + id);
   }
 
