@@ -1,0 +1,49 @@
+<p *ngIf="!album"><em>Loading...</em></p>
+
+<section fxLayout="row wrap" fxLayoutGap="60px" fxLayoutAlign="center center">
+    <mat-card fxFlex="600px" fxFlex.xs="100%">
+        <mat-card-title>{{(album !=='' || album !== undefined)? 'Album details' : 'Create a new Album' }}
+        </mat-card-title>
+        <form [formGroup]="albumForm" autocomplete="off" novalidate (ngSubmit)="createAlbum(albumForm.value)"
+            fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <input  type="hidden" placeholder="id" formControlName="id" id="id">
+            <mat-card-content>
+                <mat-form-field align="none">
+                    <input matInput type="text" placeholder="Album's name" formControlName="name" id="name">
+                    <mat-hint align="none">Not more then 60 characters long.</mat-hint>
+                    <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+                    <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Artist" formControlName="artist" id="artist">
+                <mat-hint align="none">Not more then 60 characters long.</mat-hint>
+                <mat-error *ngIf="hasError('artist', 'required')">Artist name is required</mat-error>
+                <mat-error *ngIf="hasError('artist', 'maxlength')">You have more than 60 characters</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Label" formControlName="label" id="label">
+                <mat-hint align="none">Not more then 60 characters long.</mat-hint>
+                <mat-error *ngIf="hasError('label', 'required')">label name is required</mat-error>
+                <mat-error *ngIf="hasError('label', 'maxlength')">You have more than 60 characters</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose type</mat-label>
+                <mat-select id="type" formControlName="type" [(value)]="selected">
+                  <mat-option value="vinyl">Vinyl</mat-option>
+                  <mat-option value="cd">CD</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" placeholder="stock" formControlName="stock" id="stock">
+                <mat-hint align="none">Not more then 4 characters long.</mat-hint>
+                <mat-error *ngIf="hasError('stock', 'required')">stock is required</mat-error>
+                <mat-error *ngIf="hasError('stock', 'maxlength')">You have more than 4 digits</mat-error>
+            </mat-form-field>
+            <mat-card-actions align="center">
+                <button mat-raised-button color="primary" [disabled]="!albumForm.valid">{{CreateNew===false?'Update':'Create Album'}}</button>
+                <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</section>
