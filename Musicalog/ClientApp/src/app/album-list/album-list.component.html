@@ -50,3 +50,12 @@
   <mat-paginator [pageSize]="pageSize">
   </mat-paginator>
 </div>
+
+<div class="row"  *ngIf="showMsg">
+  <div class="col-xs-12">
+    <p class="alert alert-success">
+        <strong>Album removed Successfully!</strong>
+
+    </p>
+  </div>
+</div>

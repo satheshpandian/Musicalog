@@ -33,6 +33,7 @@ namespace Musicalog
             services.AddDbContextPool<AlbumDataContext>(options =>
        options.UseSqlServer(Configuration.GetConnectionString("AlbumDatabase")));
             services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

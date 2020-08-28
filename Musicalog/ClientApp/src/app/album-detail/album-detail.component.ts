@@ -5,8 +5,6 @@ import { Album } from '../album';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { AlbumType } from '../albumtype';
-import { MatDialog } from '@angular/material/dialog';
-import { SuccessDialogComponent } from '../shared/dialogs/success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-album-detail',
@@ -19,19 +17,12 @@ export class AlbumDetailComponent implements OnInit {
   public albumForm: FormGroup;
   public selected = 'vinyl';
   public CreateNew: boolean;
-  private dialogConfig;
-  constructor(private location: Location, private activateRoute: ActivatedRoute, apiService: ApiService, private dialog: MatDialog) {
+  showMsg = false;
+  constructor(private router: Router, private location: Location, private activateRoute: ActivatedRoute, apiService: ApiService) {
     this.apiService = apiService;
-    this.dialog = this.dialogConfig;
   }
   ngOnInit(): void {
     this.CreateNew = true;
-    this.dialogConfig = {
-      height: '200px',
-      width: '400px',
-      disableClose: true,
-      data: {}
-    };
     const id: number = this.activateRoute.snapshot.params['id'];
     this.albumForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
@@ -74,11 +65,12 @@ export class AlbumDetailComponent implements OnInit {
       };
       this.apiService.updateAlbumDetails('albumapi', updateAlbum)
       .subscribe(res => {
-        const dialogRef = this.dialog.open(SuccessDialogComponent, this.dialogConfig);
-        dialogRef.afterClosed()
-          .subscribe(result => {
-            this.location.back();
-          });
+       console.log('updateAlbumDetails');
+       this.showMsg = true;
+       setTimeout (() => {
+        this.showMsg = false;
+        this.router.navigate(['/album-list']);
+     }, 1000);
       },
         (error => {
           // temporary as well

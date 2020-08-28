@@ -22,7 +22,7 @@ export class AlbumListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(AlbumDetailComponent, { static: true }) albumDetailComponent: AlbumDetailComponent;
   private apiService: ApiService;
-
+  showMsg = false;
   constructor( private router: Router, apiService: ApiService) {
     this.apiService = apiService;
     console.log('constructor');
@@ -52,7 +52,11 @@ export class AlbumListComponent implements OnInit, AfterViewInit {
   }
   public removeAlbum = (idNumber: number) => {
     this.apiService.deleteAlbum('albumapi', idNumber).subscribe((res: number) => {
-      console.log('check');
+      this.showMsg = true;
+      setTimeout (() => {
+       this.showMsg = false;
+       this.getAlbums();
+    }, 1000);
     });
   }
 
